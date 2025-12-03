@@ -1,0 +1,38 @@
+body {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+p,
+h1,
+h2,
+.dark-text {
+  @apply text-gray-300;
+}
+
+.light-text {
+  @apply text-gray-400;
+}
+
+.light-background {
+  @apply bg-gray-800;
+}
+
+.dark-background {
+  @apply bg-gray-900;
+}
+
+.btn-shadow {
+  @apply shadow transition;
+}
+
+.btn-shadow:hover {
+  @apply shadow-lg bg-gray-200;
+}
+
+.dark .btn-shadow:hover {
+  @apply bg-gray-700;
+}
+
+.btn-shadow:disabled:hover {
+  @apply shadow-none;
+}

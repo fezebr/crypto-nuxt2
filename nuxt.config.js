@@ -18,6 +18,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/styles/app.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -37,7 +38,13 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
   ],
+
+  // Axios module configuration
+  axios: {
+    baseURL: 'https://api.coingecko.com/api/v3',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
