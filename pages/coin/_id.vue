@@ -1,14 +1,24 @@
 <template>
   <div class="coin-detail-page">
     <!-- Loading State -->
-    <div
-      v-if="$fetchState.pending"
-      class="flex items-center justify-center min-h-[60vh]"
-    >
+    <div v-if="$fetchState.pending" class="flex items-center justify-center min-h-[60vh]">
       <Loading />
     </div>
 
-    <div v-else class="px-4 md:px-16 py-8">hiiiiiiii</div>
+    <div v-else class="px-4 md:px-16 py-8">
+
+      <nuxt-link
+        to="/"
+        class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors mb-6"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>Back to List</span>
+      </nuxt-link>
+
+
+    </div>
   </div>
 </template>
 
