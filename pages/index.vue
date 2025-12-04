@@ -17,6 +17,8 @@
 <script>
 import SearchBar from '~/components/home/SearchBar.vue'
 import CoinCard from '~/components/home/CoinCard.vue'
+import { getCoinsMarkets } from '~/apis/coins'
+
 export default {
   data() {
     return {
@@ -56,7 +58,7 @@ export default {
           page: this.page,
         }
 
-        this.coins = await this.$axios.$get('/coins/markets', { params })
+        this.coins = await getCoinsMarkets(this.$axios, params)
       } catch (err) {
         console.error('Error fetching coins:', err)
       }
