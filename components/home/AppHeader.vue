@@ -1,9 +1,7 @@
 <template>
-  <header class="mb-10 mt-2">
-    <h1
-      class="dark-text mb-2 text-2xl sm:text-3xl font-bold "
-    >
-      Real-time cryptocurrency market data
-    </h1>
+  <header
+    class="py-6 flex justify-between items-center shadow-md px-4 md:px-16 light-background dark-text"
+  >
+    <h1 class="text-lg font-bold">Real-time cryptocurrency market data</h1>
   </header>
 </template>
