@@ -1,6 +1,9 @@
 <template>
   <div class="px-4 md:px-16 py-8">
-    <div v-if="!$fetchState.pending">
+    <div v-if="$fetchState.pending" class="flex items-center justify-center min-h-[60vh]">
+      <Loading />
+    </div>
+    <div v-else>
       <SearchBar v-model="search" class="mb-4" />
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <CoinCard
@@ -17,6 +20,7 @@
 <script>
 import SearchBar from '~/components/home/SearchBar.vue'
 import CoinCard from '~/components/home/CoinCard.vue'
+import Loading from '~/components/shared/Loading.vue'
 import { getCoinsMarkets } from '~/apis/coins'
 
 export default {
@@ -31,6 +35,7 @@ export default {
   components: {
     CoinCard,
     SearchBar,
+    Loading,
   },
 
   computed: {
