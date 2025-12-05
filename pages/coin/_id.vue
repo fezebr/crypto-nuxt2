@@ -25,6 +25,7 @@
       </nuxt-link>
 
       <CoinDetail :coin="coin" />
+      <PriceChart :prices="chartData" :loading="chartLoading" />
       <StatsGrid :coin="coin" />
       <AboutCoin :coin="coin" />
     </div>
@@ -32,9 +33,10 @@
 </template>
 
 <script>
-import { getCoinDetails } from '~/apis/coins'
+import { getCoinDetails, getCoinMarketChart } from '~/apis/coins'
 import Loading from '~/components/shared/Loading.vue'
 import CoinDetail from '~/components/coin/CoinDetail.vue'
+import PriceChart from '~/components/coin/PriceChart.vue'
 import StatsGrid from '~/components/coin/StatsGrid.vue'
 import AboutCoin from '~/components/coin/AboutCoin.vue'
 
@@ -42,6 +44,7 @@ export default {
   components: {
     Loading,
     CoinDetail,
+    PriceChart,
     StatsGrid,
     AboutCoin,
   },
@@ -50,6 +53,7 @@ export default {
     return {
       coin: {},
       chartData: [],
+      chartLoading: false,
     }
   },
 
@@ -57,7 +61,13 @@ export default {
     const coinId = this.$route.params.id
 
     try {
-      this.coin = await getCoinDetails(this.$axios, coinId)
+      const [coinDetails, marketChart] = await Promise.all([
+        getCoinDetails(this.$axios, coinId),
+        getCoinMarketChart(this.$axios, coinId, 7),
+      ])
+
+      this.coin = coinDetails
+      this.chartData = marketChart.prices || []
     } catch (error) {
       console.error('Error', error)
       throw error

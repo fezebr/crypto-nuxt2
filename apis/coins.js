@@ -14,3 +14,13 @@ export const getCoinDetails = (axios, coinId) => {
     },
   })
 }
+
+export const getCoinMarketChart = (axios, coinId, days = 7) => {
+  return axios.$get(`/coins/${coinId}/market_chart`, {
+    params: {
+      vs_currency: 'usd',
+      days,
+    },
+  })
+}
+

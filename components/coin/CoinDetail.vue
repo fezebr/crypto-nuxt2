@@ -8,11 +8,7 @@
             :alt="coin.name"
             class="w-20 h-20 rounded-full ring-4 ring-gray-700"
           />
-          <div
-            class="absolute -bottom-1 -right-1 px-2 py-0.5 text-xs font-bold rounded-full bg-gray-700 dark-text"
-          >
-            #{{ coin.market_cap_rank }}
-          </div>
+
         </div>
 
         <div>

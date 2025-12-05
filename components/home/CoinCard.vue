@@ -2,7 +2,6 @@
   <nuxt-link
     :to="`/coin/${coin.id}`"
     class="coin-card light-background group relative rounded p-5 transition-all duration-300"
-    :style="{ animationDelay: `${index * 50}ms` }"
   >
     <div class="relative flex items-center gap-4">
       <img
@@ -68,11 +67,7 @@ export default {
 
     formattedPrice() {
       const price = this.coin.current_price || 0
-      const opts = {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: price >= 1 ? 2 : 6,
-      }
-      return '$' + price.toLocaleString('en-US', opts)
+      return '$' + price.toLocaleString('en-US')
     },
 
     formattedVolume() {
