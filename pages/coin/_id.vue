@@ -1,12 +1,7 @@
 <template>
   <div class="coin-detail-page">
     <!-- Loading State -->
-    <div
-      v-if="$fetchState.pending"
-      class="flex items-center justify-center min-h-[60vh]"
-    >
-      <Loading />
-    </div>
+    <Loading v-if="$fetchState.pending" />
 
     <div v-else class="px-4 md:px-16 py-8">
       <nuxt-link
@@ -28,9 +23,9 @@
         </svg>
         <span>Back to List</span>
       </nuxt-link>
+
       <div class="coin-header light-background rounded-2xl p-6 mb-6">
         <div class="flex flex-col md:flex-row md:items-center gap-6">
-          <!-- Logo & Name -->
           <div class="flex items-center gap-4">
             <div class="relative">
               <img
@@ -56,6 +51,8 @@
           </div>
         </div>
       </div>
+
+      <StatsGrid :coin="coin" />
     </div>
   </div>
 </template>
@@ -63,10 +60,12 @@
 <script>
 import { getCoinDetails } from '~/apis/coins'
 import Loading from '~/components/shared/Loading.vue'
+import StatsGrid from '~/components/coin/StatsGrid.vue'
 
 export default {
   components: {
     Loading,
+    StatsGrid,
   },
 
   data() {
