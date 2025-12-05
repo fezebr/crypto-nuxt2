@@ -41,6 +41,8 @@ export default {
       page: 1,
       perPage: 18,
       search: '',
+      debouncedSearch: '',
+      debounceTimer: null,
     }
   },
   components: {
@@ -49,12 +51,23 @@ export default {
     Loading,
   },
 
+  watch: {
+    search(newVal) {
+      if (this.debounceTimer) {
+        clearTimeout(this.debounceTimer)
+      }
+      this.debounceTimer = setTimeout(() => {
+        this.debouncedSearch = newVal
+      }, 300)
+    },
+  },
+
   computed: {
     filteredCoins() {
-      if (!this.search.trim()) {
+      if (!this.debouncedSearch.trim()) {
         return this.coins
       }
-      const query = this.search.toLowerCase().trim()
+      const query = this.debouncedSearch.toLowerCase().trim()
       return this.coins.filter(
         (coin) =>
           coin.name.toLowerCase().includes(query) ||
@@ -73,6 +86,12 @@ export default {
 
   async fetch() {
     await this.fetchCoins()
+  },
+
+  beforeDestroy() {
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer)
+    }
   },
 
   methods: {
