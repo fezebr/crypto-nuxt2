@@ -1,5 +1,5 @@
 <template>
-  <div class="price-chart light-background mb-2 rounded-2xl">
+  <div class="price-chart light-background mb-2 rounded-xl p-5">
     <h3 class="text-lg font-semibold dark-text mb-2">7 Day Price Chart</h3>
 
     <LineChart

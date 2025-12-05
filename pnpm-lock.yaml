@@ -11,6 +11,9 @@ importers:
       '@nuxtjs/axios':
         specifier: ^5.13.6
         version: 5.13.6
+      chart.js:
+        specifier: 2.9.4
+        version: 2.9.4
       core-js:
         specifier: ^3.15.1
         version: 3.47.0
@@ -20,6 +23,9 @@ importers:
       nuxt:
         specifier: ^2.15.7
         version: 2.18.1(consola@3.4.2)(prettier@2.8.8)(typescript@4.2.4)(vue@2.7.16)
+      vue-chartjs:
+        specifier: ^3.5.1
+        version: 3.5.1(chart.js@2.9.4)
     devDependencies:
       '@babel/eslint-parser':
         specifier: ^7.14.7
@@ -1209,6 +1215,9 @@ packages:
   '@types/body-parser@1.19.6':
     resolution: {integrity: sha512-HLFeCYgz89uk22N5Qg3dvGvsv46B8GLvKKo1zKG4NybA8U2DiEO3w9lqGg29t/tfLRJpJ6iQxnVw4OnB7MoM9g==}
 
+  '@types/chart.js@2.9.41':
+    resolution: {integrity: sha512-3dvkDvueckY83UyUXtJMalYoH6faOLkWQoaTlJgB4Djde3oORmNP0Jw85HtzTuXyliUHcdp704s0mZFQKio/KQ==}
+
   '@types/compression@1.7.5':
     resolution: {integrity: sha512-AAQvK5pxMpaT+nDvhHrsBhLSYG5yQdtkaJE1WYieSNY2mVFKAgmU4ks65rkZD5oqnGCFLyQpUr1CqI4DmUMyDg==}
 
@@ -1885,6 +1894,15 @@ packages:
 
   chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
+
+  chart.js@2.9.4:
+    resolution: {integrity: sha512-B07aAzxcrikjAPyV+01j7BmOpxtQETxTSlQ26BEYJ+3iUkbNKaOJ/nDbT6JjyqYxseM0ON12COHYdU2cTIjC7A==}
+
+  chartjs-color-string@0.6.0:
+    resolution: {integrity: sha512-TIB5OKn1hPJvO7JcteW4WY/63v6KwEdt6udfnDE9iCAZgy+V4SrbSxoIbTw/xkUIapjEI4ExGtD0+6D3KyFd7A==}
+
+  chartjs-color@2.4.1:
+    resolution: {integrity: sha512-haqOg1+Yebys/Ts/9bLo/BqUcONQOdr/hoEr2LLTRl6C5LXctUdHxsCYfvQVg5JIxITrfCNUDr4ntqmQk9+/0w==}
 
   chokidar@2.1.8:
     resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==}
@@ -4039,6 +4057,9 @@ packages:
     resolution: {integrity: sha512-2lMlY1Yc1+CUy0gw4H95uNN7vjbpoED7NNRSBHE25nWfLBdmMzFCsPshlzbxHz+gYMcBEUN8V4pU16prcdPSgA==}
     engines: {node: '>=6'}
 
+  moment@2.30.1:
+    resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
+
   move-concurrently@1.0.1:
     resolution: {integrity: sha512-hdrFxZOycD/g6A6SoI2bB5NA/5NEqD0569+S47WZhPvm46sD50ZHdYaFmnua5lndde9rCHGjmfK7Z8BuCt/PcQ==}
     deprecated: This package is no longer supported.
@@ -6058,6 +6079,12 @@ packages:
   vm-browserify@1.1.2:
     resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
 
+  vue-chartjs@3.5.1:
+    resolution: {integrity: sha512-foocQbJ7FtveICxb4EV5QuVpo6d8CmZFmAopBppDIGKY+esJV8IJgwmEW0RexQhxqXaL/E1xNURsgFFYyKzS/g==}
+    engines: {node: '>=6.9.0', npm: '>= 3.0.0'}
+    peerDependencies:
+      chart.js: '>= 2.5'
+
   vue-client-only@2.1.0:
     resolution: {integrity: sha512-vKl1skEKn8EK9f8P2ZzhRnuaRHLHrlt1sbRmazlvsx6EiC3A8oWF8YCBrMJzoN+W3OnElwIGbVjsx6/xelY1AA==}
 
@@ -8026,6 +8053,10 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/node': 16.18.126
 
+  '@types/chart.js@2.9.41':
+    dependencies:
+      moment: 2.30.1
+
   '@types/compression@1.7.5':
     dependencies:
       '@types/express': 5.0.6
@@ -8988,6 +9019,20 @@ snapshots:
       supports-color: 7.2.0
 
   chardet@0.7.0: {}
+
+  chart.js@2.9.4:
+    dependencies:
+      chartjs-color: 2.4.1
+      moment: 2.30.1
+
+  chartjs-color-string@0.6.0:
+    dependencies:
+      color-name: 1.1.4
+
+  chartjs-color@2.4.1:
+    dependencies:
+      chartjs-color-string: 0.6.0
+      color-convert: 1.9.3
 
   chokidar@2.1.8:
     dependencies:
@@ -11306,6 +11351,8 @@ snapshots:
 
   modern-normalize@1.1.0: {}
 
+  moment@2.30.1: {}
+
   move-concurrently@1.0.1:
     dependencies:
       aproba: 1.2.0
@@ -13586,6 +13633,11 @@ snapshots:
   vary@1.1.2: {}
 
   vm-browserify@1.1.2: {}
+
+  vue-chartjs@3.5.1(chart.js@2.9.4):
+    dependencies:
+      '@types/chart.js': 2.9.41
+      chart.js: 2.9.4
 
   vue-client-only@2.1.0: {}
 

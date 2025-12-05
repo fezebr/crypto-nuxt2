@@ -16,13 +16,17 @@
         <h3 class="text-xl font-semibold dark-text mb-2">No coins found</h3>
       </div>
 
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
         <CoinCard
           v-for="(coin, index) in filteredCoins"
           :key="coin.id"
           :coin="coin"
           :index="index"
         />
+      </div>
+
+      <div v-if="loading" class="flex items-center justify-center py-8">
+        <Loading />
       </div>
     </div>
   </div>
@@ -39,10 +43,13 @@ export default {
     return {
       coins: [],
       page: 1,
-      perPage: 18,
+      perPage: 36,
+      maxCoins: 1000,
       search: '',
       debouncedSearch: '',
       debounceTimer: null,
+      loading: false,
+      hasMore: true,
     }
   },
   components: {
@@ -88,15 +95,49 @@ export default {
     await this.fetchCoins()
   },
 
+  mounted() {
+    this.initScroll()
+  },
+
   beforeDestroy() {
     if (this.debounceTimer) {
       clearTimeout(this.debounceTimer)
     }
+    window.removeEventListener('scroll', this.handleScroll)
   },
 
   methods: {
-    async fetchCoins() {
+    initScroll() {
+      window.addEventListener('scroll', this.handleScroll)
+    },
+
+    handleScroll() {
+      const bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight >=
+        document.documentElement.offsetHeight - 100
+
+      if (
+        bottomOfWindow &&
+        this.hasMore &&
+        !this.loading &&
+        !this.debouncedSearch &&
+        this.coins.length < this.maxCoins
+      ) {
+        this.loadMore()
+      }
+    },
+
+    async loadMore() {
+      this.page++
+      await this.fetchCoins(true)
+    },
+
+    async fetchCoins(append = false) {
       try {
+        if (append) {
+          this.loading = true
+        }
+
         const params = {
           vs_currency: 'usd',
           order: 'market_cap_desc',
@@ -104,9 +145,21 @@ export default {
           page: this.page,
         }
 
-        this.coins = await getCoinsMarkets(this.$axios, params)
+        const newCoins = await getCoinsMarkets(this.$axios, params)
+
+        if (append) {
+          this.coins = [...this.coins, ...newCoins]
+        } else {
+          this.coins = newCoins
+        }
+
+        if (newCoins.length < this.perPage || this.coins.length >= this.maxCoins) {
+          this.hasMore = false
+        }
       } catch (err) {
         console.error('Error fetching coins:', err)
+      } finally {
+        this.loading = false
       }
     },
   },
