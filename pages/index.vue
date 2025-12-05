@@ -1,13 +1,24 @@
 <template>
   <div class="px-4 md:px-16 py-8">
-    <div v-if="$fetchState.pending" class="flex items-center justify-center min-h-[60vh]">
+    <div
+      v-if="$fetchState.pending"
+      class="flex items-center justify-center min-h-[60vh]"
+    >
       <Loading />
     </div>
     <div v-else>
-      <SearchBar v-model="search" class="mb-4" />
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <SearchBar v-model="search" class="mb-6" />
+
+      <div
+        v-if="filteredCoins.length === 0"
+        class="flex flex-col items-center justify-center py-16 text-center"
+      >
+        <h3 class="text-xl font-semibold dark-text mb-2">No coins found</h3>
+      </div>
+
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <CoinCard
-          v-for="(coin, index) in coins"
+          v-for="(coin, index) in filteredCoins"
           :key="coin.id"
           :coin="coin"
           :index="index"
@@ -39,6 +50,17 @@ export default {
   },
 
   computed: {
+    filteredCoins() {
+      if (!this.search.trim()) {
+        return this.coins
+      }
+      const query = this.search.toLowerCase().trim()
+      return this.coins.filter(
+        (coin) =>
+          coin.name.toLowerCase().includes(query) ||
+          coin.symbol.toLowerCase().includes(query)
+      )
+    },
     gainersCount() {
       return this.coins.filter((c) => (c.price_change_percentage_24h || 0) >= 0)
         .length
