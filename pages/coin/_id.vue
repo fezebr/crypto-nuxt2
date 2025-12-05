@@ -26,6 +26,7 @@
 
       <CoinDetail :coin="coin" />
       <StatsGrid :coin="coin" />
+      <AboutCoin :coin="coin" />
     </div>
   </div>
 </template>
@@ -35,12 +36,14 @@ import { getCoinDetails } from '~/apis/coins'
 import Loading from '~/components/shared/Loading.vue'
 import CoinDetail from '~/components/coin/CoinDetail.vue'
 import StatsGrid from '~/components/coin/StatsGrid.vue'
+import AboutCoin from '~/components/coin/AboutCoin.vue'
 
 export default {
   components: {
     Loading,
     CoinDetail,
     StatsGrid,
+    AboutCoin,
   },
 
   data() {
@@ -66,18 +69,5 @@ export default {
 <style scoped>
 .coin-detail-page {
   min-height: 60vh;
-}
-
-.description-content {
-  text-align: justify;
-}
-
-.description-content :deep(a) {
-  color: #60a5fa;
-  text-decoration: underline;
-}
-
-.description-content :deep(a:hover) {
-  color: #93c5fd;
 }
 </style>
