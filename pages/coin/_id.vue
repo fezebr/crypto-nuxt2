@@ -24,34 +24,7 @@
         <span>Back to List</span>
       </nuxt-link>
 
-      <div class="coin-header light-background rounded-2xl p-6 mb-6">
-        <div class="flex flex-col md:flex-row md:items-center gap-6">
-          <div class="flex items-center gap-4">
-            <div class="relative">
-              <img
-                :src="coin.image?.large"
-                :alt="coin.name"
-                class="w-20 h-20 rounded-full ring-4 ring-gray-700"
-              />
-              <div
-                class="absolute -bottom-1 -right-1 px-2 py-0.5 text-xs font-bold rounded-full bg-gray-700 dark-text"
-              >
-                #{{ coin.market_cap_rank }}
-              </div>
-            </div>
-
-            <div>
-              <h1 class="text-3xl font-bold dark-text">{{ coin.name }}</h1>
-              <div class="flex items-center gap-2 mt-1">
-                <span class="text-lg font-medium light-text uppercase">{{
-                  coin.symbol
-                }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <CoinDetail :coin="coin" />
       <StatsGrid :coin="coin" />
     </div>
   </div>
@@ -60,11 +33,13 @@
 <script>
 import { getCoinDetails } from '~/apis/coins'
 import Loading from '~/components/shared/Loading.vue'
+import CoinDetail from '~/components/coin/CoinDetail.vue'
 import StatsGrid from '~/components/coin/StatsGrid.vue'
 
 export default {
   components: {
     Loading,
+    CoinDetail,
     StatsGrid,
   },
 
@@ -91,30 +66,6 @@ export default {
 <style scoped>
 .coin-detail-page {
   min-height: 60vh;
-}
-
-.stat-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-.coin-header {
-  animation: fadeInDown 0.5s ease-out;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .description-content {
